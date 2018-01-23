@@ -12,6 +12,10 @@ class StoriesController < ApplicationController
     @story = Story.new
   end
   
+  def edit
+    @story = Story.find(params[:id])
+  end
+ 
   def create
     @story = Story.new(story_params)
     @story.user = current_user
@@ -23,6 +27,16 @@ class StoriesController < ApplicationController
     end
   end
   
+  def update
+    @story = Story.find(params[:id])
+ 
+    if @story.update(story_params)
+       redirect_to @story
+    else
+      render 'edit'
+    end
+  end
+ 
   private 
   def story_params
     params.require(:story).permit(:text)
