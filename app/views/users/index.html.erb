@@ -1,0 +1,26 @@
+<h1>Welcome to the team introduction game</h1>
+
+<%= link_to 'Make a Guess', controller: 'stories' %> | <%= link_to 'Add a Story', new_story_path %>
+
+<h2>Current Ranking</h2>
+
+<table>
+  <tr>
+    <th>User</th>
+	<th>Stories</th>
+	<th>Guesses</th>
+	<th>Correct Guesses</th>
+	<th>Points</th>
+  </tr>
+  
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.number_of_stories %></td>
+      <td><%= user.number_of_guesses %></td>
+      <td><%= user.correct_guesses %></td>
+      <td><%= user.points %></td>
+    </tr>
+  <% end %>
+</table>
+

@@ -1,0 +1,35 @@
+<h1>New Personal Story</h1>
+
+<%= form_with model: @story, local: true do |form| %>
+ 
+  <% if @story.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@story.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @story.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= form.text_area :text, size: "20x7" %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+ 
+<% end %>
+
+<p>
+	Please read the story again before saving it, since it cannot be modified once saved.
+	<br/>
+	Also, make sure your writing is gender neutral.
+</p>  
+
+<%= link_to 'All Stories', stories_path %> | <%= link_to 'Ranking', users_path %>

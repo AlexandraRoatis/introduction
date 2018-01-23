@@ -1,0 +1,36 @@
+<h1>Welcome to the team introduction game</h1>
+
+<h2>Guess the author</h2>
+ 
+<table>
+  <tr>
+    <th>Story</th>
+	<th>My Guesses</th>
+  </tr>
+ 
+  <% @other_user_stories.each do |story| %>
+    <tr>
+      <td><%= story.text %></td>
+      <!-- <td><%# story.guesses[0].owner %></td> -->
+	  
+	  <% if story.user_has_guessed?(current_user) %>
+	  	<td>Your Guess: <%= story.get_guess_for_user(current_user).author.email %></td>
+	  <% else %>
+	  	<td><%= link_to 'Guess', story_path(story) %></td>
+	  <% end %>
+
+    </tr>
+  <% end %>
+</table>
+
+<h2>My Stories</h2>
+<%= link_to 'New', new_story_path %>
+<table>
+  <% @current_user_stories.each do |story| %>
+    <tr>
+      <td><%= story.text %></td>
+      <!-- <td><%# story.guesses[0].owner %></td> -->
+	  <td><%= link_to 'Edit', story_path(story) %></td>
+    </tr>
+  <% end %>
+</table>

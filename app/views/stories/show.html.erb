@@ -1,0 +1,26 @@
+<h1>Guess who wrote the story</h1>
+
+<p>
+  <strong>Story:</strong>
+  <%= @story.text %>
+</p>
+
+<% if @story.user != current_user && !Guess.where(user: current_user, story: @story).exists?  %>
+	<p>Cast your vote here</p>
+	<h2>My guess:</h2>
+	<%= form_with(model: [ @story, @story.guesses.build ], local: true) do |form| %>
+		 
+	<%= form.select(:author_id) do %>	  
+		<%= options_from_collection_for_select(User.where.not(id: current_user.id), :id, :email) %>
+	<% end %>
+		  
+	  <p>
+	    <%= form.submit %>
+	  </p>
+	<% end %>
+
+<% elsif Guess.where(user: current_user, story: @story).exists? %>
+	<p><strong>You guessed:</strong><%= @story.guesses.where(user: current_user).take.author.email %></p>
+<% end %>
+
+<%= link_to 'Back', stories_path %>
