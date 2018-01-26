@@ -10,14 +10,11 @@
 
   <body>
 	<% if user_signed_in? %>
-	  <li>
-	  	<%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
-	  </li>
-	<% else %>
-	   <li>
-	   	<%= link_to('Login', new_user_session_path)  %>  
-	   </li>
-	 <% end %>
+		<%= link_to 'Current Ranking', controller: 'users' %> | 
+		<%= link_to 'Read and Guess', controller: 'stories' %> | 
+		<%= link_to 'Share a Story', new_story_path %> | 
+	  	<%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+	<% end %>
     <%= yield %>
   </body>
 </html>

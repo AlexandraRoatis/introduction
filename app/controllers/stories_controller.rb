@@ -1,4 +1,5 @@
 class StoriesController < ApplicationController
+  
   def index
     @current_user_stories = Story.where(user: current_user)
     @other_user_stories = Story.where.not(user: current_user)
@@ -21,7 +22,7 @@ class StoriesController < ApplicationController
     @story.user = current_user
     
     if @story.save
-      redirect_to @story
+      redirect_to stories_path
     else
       render 'new'
     end
@@ -31,7 +32,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
  
     if @story.update(story_params)
-       redirect_to @story
+      redirect_to stories_path
     else
       render 'edit'
     end

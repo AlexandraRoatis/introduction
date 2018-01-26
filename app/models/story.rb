@@ -1,6 +1,6 @@
 class Story < ApplicationRecord
   belongs_to :user
-  validates :text, presence: true, length: { minimum: 5, maximum: 140}
+  validates :text, presence: true, length: { minimum: 5, maximum: 140}, on: :create
   has_many :guesses
   
   def user_has_guessed? u

@@ -1,36 +1,45 @@
-<h1>Welcome to the team introduction game</h1>
+<center><h1>Plat4Life 2018 Game</h1></center>
 
-<h2>Guess the author</h2>
+<p>Socialize with your colleagues and try to find out who these stories belong to.
+<br/>
+You only get one shot at each!</p>
  
+<h3>Pending Stories</h3>
 <table>
-  <tr>
-    <th>Story</th>
-	<th>My Guesses</th>
-  </tr>
- 
   <% @other_user_stories.each do |story| %>
     <tr>
-      <td><%= story.text %></td>
-      <!-- <td><%# story.guesses[0].owner %></td> -->
-	  
-	  <% if story.user_has_guessed?(current_user) %>
-	  	<td>Your Guess: <%= story.get_guess_for_user(current_user).author.email %></td>
-	  <% else %>
-	  	<td><%= link_to 'Guess', story_path(story) %></td>
+	  <% if !story.user_has_guessed?(current_user) %>
+	  	<td align="left"><%= story.text %></td>
+	  	<td align="right"><%= link_to 'Guess', story_path(story) %></td>
 	  <% end %>
 
     </tr>
   <% end %>
 </table>
 
-<h2>My Stories</h2>
-<%= link_to 'New', new_story_path %>
+<h3>My Shared Stories</h3>
 <table>
   <% @current_user_stories.each do |story| %>
     <tr>
-      <td><%= story.text %></td>
-      <!-- <td><%# story.guesses[0].owner %></td> -->
-	  <td><%= link_to 'Edit', edit_story_path(story) %></td>
+	  <td align="right"><%= link_to 'Edit', edit_story_path(story) %></td>
+      <td align="left"><%= story.text %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h3>My Guesses</h3>
+<table>
+  <tr>
+    <th>Story</th>
+	<th>My Guess</th>
+  </tr>
+ 
+  <% @other_user_stories.each do |story| %>
+    <tr>
+	  <% if story.user_has_guessed?(current_user) %>
+		<td align="left"><%= story.text %></td>
+	  	<td align="right"><%= story.get_guess_for_user(current_user).author.name %></td>
+	  <% end %>
     </tr>
   <% end %>
 </table>

@@ -1,26 +1,45 @@
-<h1>Welcome to the team introduction game</h1>
+<center><h1>Plat4Life 2018 Game</h1></center>
+<center><h2>Current Ranking</h2></center>
 
-<%= link_to 'Make a Guess', controller: 'stories' %> | <%= link_to 'Add a Story', new_story_path %>
+<style>
+	th, td { padding-right: 15px; }
+</style>
 
-<h2>Current Ranking</h2>
-
-<table>
-  <tr>
-    <th>User</th>
-	<th>Stories</th>
-	<th>Guesses</th>
-	<th>Correct Guesses</th>
-	<th>Points</th>
-  </tr>
+<center>
+	<table>
+		<tr>
+			<th> </th>
+			<th>Stories</th>
+			<th>Guesses</th>
+			<th>Interest</th>
+			<th>Correct</th>
+			<th>Points</th>
+		</tr>
   
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.email %></td>
-      <td><%= user.number_of_stories %></td>
-      <td><%= user.number_of_guesses %></td>
-      <td><%= user.correct_guesses %></td>
-      <td><%= user.points %></td>
-    </tr>
-  <% end %>
-</table>
+		<% @users.each do |user| %>
+		<tr>
+			<td align="left"><%= user.name %></td>
+			<td align="right"><%= user.number_of_stories %></td>
+			<td align="right"><%= user.number_of_guesses %></td>
+			<td align="right"><%= user.interest_in_stories %></td>
+			<td align="right"><%= user.correct_guesses %></td>
+			<td align="right"><%= user.points %></td>
+		</tr>
+		<% end %>
+	</table>
+</center>
+
+<br/>
+
+<center>
+<b>Points</b> = 2 x <b>Stories</b> + <b>Guesses</b> + <b>Interest</b> + 10 x <b>Correct</b>
+</center>
+
+<h3>Point system:</h3>
+<ul>
+	<li><b>2 pt</b> for sharing a personal story</li>
+	<li><b>1 pt</b> for attempting to guess who wrote a story</li>
+	<li><b>1 pt</b> for each attempted guess on your stories</li>
+	<li><b>10 pt</b> for each correct guess</li>
+</ul>
 

@@ -1,4 +1,5 @@
 class GuessesController < ApplicationController
+  
   def new
   end
   
@@ -6,7 +7,7 @@ class GuessesController < ApplicationController
     story = Story.find(params[:story_id])
     author = User.find(params[:guess][:author_id])
     story.guesses.create(user: current_user, author: author)
-    redirect_to story_path(story)
+    redirect_to stories_path
   end
  
   private

@@ -15,6 +15,10 @@ class User < ApplicationRecord
     guesses.count
   end
   
+  def interest_in_stories
+    stories.joins(:guesses).count
+  end
+  
   def correct_guesses
     count = 0
     guesses.each do |g|
@@ -24,6 +28,6 @@ class User < ApplicationRecord
   end
   
   def points
-    (number_of_stories * 5) + number_of_guesses + (correct_guesses * 10)
+    (number_of_stories * 2) + number_of_guesses + interest_in_stories + (correct_guesses * 10)
   end
 end
