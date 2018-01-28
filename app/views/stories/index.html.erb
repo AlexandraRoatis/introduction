@@ -12,7 +12,6 @@ You only get one shot at each!</p>
 	  	<td align="left"><%= story.text %></td>
 	  	<td align="right"><%= link_to 'Guess', story_path(story) %></td>
 	  <% end %>
-
     </tr>
   <% end %>
 </table>
@@ -33,13 +32,10 @@ You only get one shot at each!</p>
     <th>Story</th>
 	<th>My Guess</th>
   </tr>
- 
-  <% @other_user_stories.each do |story| %>
+  <% @guessed_stories.each do |story| %>
     <tr>
-	  <% if story.user_has_guessed?(current_user) %>
 		<td align="left"><%= story.text %></td>
 	  	<td align="right"><%= story.get_guess_for_user(current_user).author.name %></td>
-	  <% end %>
     </tr>
   <% end %>
 </table>

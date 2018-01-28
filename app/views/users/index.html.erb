@@ -6,25 +6,28 @@
 </style>
 
 <center>
-	<table>
-		<tr>
-			<th> </th>
-			<th>Stories</th>
-			<th>Guesses</th>
-			<th>Interest</th>
-			<th>Correct</th>
-			<th>Points</th>
-		</tr>
-  
-		<% @users.each do |user| %>
-		<tr>
-			<td align="left"><%= user.name %></td>
-			<td align="right"><%= user.number_of_stories %></td>
-			<td align="right"><%= user.number_of_guesses %></td>
-			<td align="right"><%= user.interest_in_stories %></td>
-			<td align="right"><%= user.correct_guesses %></td>
-			<td align="right"><%= user.points %></td>
-		</tr>
+  	<% if @count < 10 %>
+    	Only <%= @count %> people have shared stories. At least 10 are needed before ranking is displayed.
+  	<% else %>
+		<table>
+			<tr>
+				<th> </th>
+				<th>Stories</th>
+				<th>Guesses</th>
+				<th>Interest</th>
+				<th>Correct</th>
+				<th>Points</th>
+			</tr>
+  	  	   <% @users.each do |user| %>
+			<tr>
+				<td align="left"><%= user.name %></td>
+				<td align="right"><%= user.number_of_stories %></td>
+				<td align="right"><%= user.number_of_guesses %></td>
+				<td align="right"><%= user.interest_in_stories %></td>
+				<td align="right"><%= user.correct_guesses %></td>
+				<td align="right"><%= user.points %></td>
+			</tr>
+			<% end %>
 		<% end %>
 	</table>
 </center>

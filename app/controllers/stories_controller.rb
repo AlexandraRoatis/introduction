@@ -2,7 +2,8 @@ class StoriesController < ApplicationController
   
   def index
     @current_user_stories = Story.where(user: current_user)
-    @other_user_stories = Story.where.not(user: current_user)
+    @other_user_stories = Story.where.not(user: current_user).shuffle
+    @guessed_stories = Story.joins(:guesses).where(guesses: {user: current_user})
   end
   
   def show
@@ -11,6 +12,8 @@ class StoriesController < ApplicationController
 
   def new
     @story = Story.new
+    @scount = Story.where(user: current_user).count
+    @gcount = Guess.where(user: current_user).count
   end
   
   def edit
@@ -19,6 +22,9 @@ class StoriesController < ApplicationController
  
   def create
     @story = Story.new(story_params)
+    @scount = Story.where(user: current_user).count
+    @gcount = Guess.where(user: current_user).count
+
     @story.user = current_user
     
     if @story.save

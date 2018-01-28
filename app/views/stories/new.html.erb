@@ -1,5 +1,10 @@
 <h2>New Personal Story</h2>
 
+<% if @scount >= 20 && @gcount < 3 * @scount %>
+You added over 20 stories, but have not made enough guesses. <br/>
+Your number of guesses must be triple the number of stories to continue sharing.
+<% else %>    
+
 <%= form_with model: @story, local: true do |form| %>
  
   <% if @story.errors.any? %>
@@ -15,7 +20,7 @@
       </ul>
     </div>
   <% end %>
- 
+
   <p>
     <%= form.text_area :text, size: "20x7" %>
   </p>
@@ -23,9 +28,6 @@
   <p>
     <%= form.submit %>
   </p>
- 
-<% end %>
-
 <p>
 	Please read the story again before saving it.
 	<br/>
@@ -33,3 +35,6 @@
 	<br/>
 	While possible, it is preferable not to modify the story once saved.
 </p>
+<% end %>
+<% end %>
+
